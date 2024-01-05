@@ -3,6 +3,8 @@ package com.vulpovile.games.paddlenet;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,7 +18,7 @@ import com.vulpovile.games.listeners.impl.LabelSettingsListener;
 import com.vulpovile.games.paddlenet.dialog.AboutDialog;
 import com.vulpovile.games.paddlenet.dialog.IPPortDialog;
 
-public class PaddleNet extends JFrame {
+public class PaddleNet extends JFrame implements WindowListener{
 	/**
 	 * 
 	 */
@@ -37,7 +39,8 @@ public class PaddleNet extends JFrame {
 		this.getContentPane().setLayout(new BorderLayout());
 		this.getContentPane().add(paddlePanel, BorderLayout.CENTER);
 		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		addWindowListener(this);
 
 		JToolBar toolBar = new JToolBar();
 
@@ -88,9 +91,46 @@ public class PaddleNet extends JFrame {
 				new AboutDialog(PaddleNet.this).setVisible(true);
 			}
 		});
+		
 	}
 
 	public static void main(String[] args) {
+		Sound.init();
 		new PaddleNet();
+	}
+
+	public void windowActivated(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void windowClosed(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void windowClosing(WindowEvent arg0) {
+		dispose();
+		Sound.destroy();
+	}
+
+	public void windowDeactivated(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void windowDeiconified(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void windowIconified(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void windowOpened(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }
