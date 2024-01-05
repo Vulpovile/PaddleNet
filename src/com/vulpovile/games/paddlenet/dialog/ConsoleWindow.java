@@ -11,10 +11,7 @@ import javax.swing.border.EmptyBorder;
 import com.vulpovile.games.paddlenet.PaddlePanel;
 
 public class ConsoleWindow extends JDialog {
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	

@@ -25,12 +25,14 @@ public class Sound {
 	}
 
 	public static void destroy() {
+		System.out.println("Closing soundsystem gracefully...");
 		if (sdl != null)
 		{
 			sdl.drain();
 			sdl.stop();
 			sdl.close();
 		}
+		System.out.println("Closed!");
 	}
 
 	public static void tone(int hz, int msecs, double vol) throws LineUnavailableException {

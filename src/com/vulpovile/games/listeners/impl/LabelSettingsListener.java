@@ -15,7 +15,9 @@ public class LabelSettingsListener implements SettingsListener {
 	
 	public void settingsChanged(PaddlePanel paddlePanel){
 		String ballAngle = "Ball Angle: " + (paddlePanel.getPaddleDivider() == 2 ? "Easy" : "Difficult");
-		String ballSpeed = "Ball Speed: " + (Math.abs(paddlePanel.getBallXSpeed()) == 5 ? "Easy" : "Difficult");
+		String ballSpeed = "Ball Speed: " + (Math.abs(paddlePanel.getBallXSpeed()) <= 6 ? "Easy" : "Difficult");
 		theLabel.setText(ballAngle + " | " + ballSpeed);
+		theLabel.revalidate();
+		theLabel.repaint();
 	}
 }

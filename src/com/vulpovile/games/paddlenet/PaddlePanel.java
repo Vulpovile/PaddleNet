@@ -94,7 +94,6 @@ public class PaddlePanel extends JPanel implements MouseMotionListener, MouseWhe
 	//For Ice Hockey
 	private boolean paddle12hit = false;
 	private boolean paddle22hit = false;
-	private boolean canHit = true;
 	
 	private ArrayList<SettingsListener> settingsListeners = new ArrayList<SettingsListener>();
 
@@ -445,7 +444,6 @@ public class PaddlePanel extends JPanel implements MouseMotionListener, MouseWhe
 					if (gameMode == SQUASH && ballXVelocity < 0 && ballX < 4)
 					{
 						ballXVelocity = (byte) -ballXVelocity;
-						canHit = true;
 						Sound.toneAsync(496, 50, 0.5);
 						break;
 					}
@@ -464,7 +462,6 @@ public class PaddlePanel extends JPanel implements MouseMotionListener, MouseWhe
 					{
 						if (isMain() && !rightOwner && ballX > 612 && ballX < 620 && ballY < paddle2 + paddle2HeightHalf + ballHeightHalf && ballY > paddle2 - paddle2HeightHalf - ballHeightHalf)
 						{
-							canHit = false;
 							this.paddle22hit = false;
 							this.paddle12hit = false;
 							this.rightOwner = !this.rightOwner;
@@ -478,9 +475,8 @@ public class PaddlePanel extends JPanel implements MouseMotionListener, MouseWhe
 							}
 							break;
 						}
-						else if (!isServer() && rightOwner && (gameMode == SQUASH && canHit && ballX > 594 && ballX < 602 || gameMode != SQUASH && ballX > 20 && ballX < 28) && ballY < paddle1 + paddle1HeightHalf + ballHeightHalf && ballY > paddle1 - paddle1HeightHalf - ballHeightHalf)
+						else if (!isServer() && rightOwner && (gameMode == SQUASH && ballXVelocity > 0 && ballX > 594 && ballX < 602 || gameMode != SQUASH && ballX > 20 && ballX < 28) && ballY < paddle1 + paddle1HeightHalf + ballHeightHalf && ballY > paddle1 - paddle1HeightHalf - ballHeightHalf)
 						{
-							canHit = false;
 							this.paddle22hit = false;
 							this.paddle12hit = false;
 							this.rightOwner = !this.rightOwner;
@@ -498,7 +494,6 @@ public class PaddlePanel extends JPanel implements MouseMotionListener, MouseWhe
 						{
 							if (isMain() && !paddle22hit && ballX > 160 && ballX < 168 && ballY < paddle2 + paddle2HeightHalf + ballHeightHalf && ballY > paddle2 - paddle2HeightHalf - ballHeightHalf)
 							{
-								canHit = false;
 								this.paddle22hit = true;
 								if (!rightOwner)
 								{
@@ -517,7 +512,6 @@ public class PaddlePanel extends JPanel implements MouseMotionListener, MouseWhe
 							}
 							else if (!isServer() && !paddle12hit && ballX > 472 && ballX < 480 && ballY < paddle1 + paddle1HeightHalf + ballHeightHalf && ballY > paddle1 - paddle1HeightHalf - ballHeightHalf)
 							{
-								canHit = false;
 								this.paddle12hit = true;
 								if (rightOwner)
 								{
@@ -539,7 +533,6 @@ public class PaddlePanel extends JPanel implements MouseMotionListener, MouseWhe
 						{
 							if (isMain() && !rightOwner && ballX > 412 && ballX < 420 && ballY < paddle2 + paddle2HeightHalf + ballHeightHalf && ballY > paddle2 - paddle2HeightHalf - ballHeightHalf)
 							{
-								canHit = false;
 								this.paddle22hit = false;
 								this.paddle12hit = false;
 								this.rightOwner = !this.rightOwner;
@@ -555,7 +548,6 @@ public class PaddlePanel extends JPanel implements MouseMotionListener, MouseWhe
 							}
 							else if (!isServer() && rightOwner && ballX > 220 && ballX < 228 && ballY < paddle1 + paddle1HeightHalf + ballHeightHalf && ballY > paddle1 - paddle1HeightHalf - ballHeightHalf)
 							{
-								this.canHit = false;
 								this.paddle22hit = false;
 								this.paddle12hit = false;
 								this.rightOwner = !this.rightOwner;
@@ -613,7 +605,6 @@ public class PaddlePanel extends JPanel implements MouseMotionListener, MouseWhe
 		{
 			ballXVelocity = (byte) -ballXVelocity;
 		}
-		this.canHit = false;
 		this.paddle22hit = false;
 		this.paddle12hit = false;
 		this.rightOwner = ballXVelocity < 0;
@@ -784,7 +775,6 @@ public class PaddlePanel extends JPanel implements MouseMotionListener, MouseWhe
 	}
 
 	public void hit(short x, short y, byte xVelocity, byte yVelocity, boolean resetPaddleFlags) {
-		canHit = false;
 		if (resetPaddleFlags)
 		{
 			this.paddle12hit = false;
